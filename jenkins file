@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    stages{
+        stage('cloning script'){
+            steps{
+                git 'https://github.com/kaza514/hello-world.git'
+            }
+        }
+        stage('Maven Build'){
+            steps{
+              sh 'mvn clane install'
+            }
+        }
+        stage('Docker Build'){
+            steps{
+              
+                sh 'docker build -t myjava:1 .'
+                sh 'docker rm -f 
+                sh 'docker run -d -p 8081:8080 --name demoapp2 kaza514/demo:1.11'
+            }
+        }
+    }
+}
